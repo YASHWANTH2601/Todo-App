@@ -15,7 +15,7 @@ app.use("/api/todos", todoRoutes);
 app.get('/', (req, res) => {
     res.send('Hello world')
   })
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 const startServer=async()=>{
     try {
