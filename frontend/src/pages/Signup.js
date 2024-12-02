@@ -2,8 +2,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
-function Signup() {
+const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,26 +10,25 @@ function Signup() {
 
   const handleSignup = async (e) => {
     e.preventDefault();
-    const userDetails = { email, password,username }
+    const userDetails = { email, password, username };
     // const url = `http://localhost:5000/api/users/signup`;
     const url = `${process.env.REACT_APP_API_URL}/users/signup`;
-    
     const options = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify( userDetails ),
-    }
+      body: JSON.stringify(userDetails),
+    };
     try {
       const response = await fetch(url, options);
       if (!response.ok) {
-        throw new Error('Signup failed');
+        throw new Error("Signup failed");
       }
       const data = await response.json();
       console.log(data);
-      
-      console.log('Signup successful:', data);
+
+      console.log("Signup successful:", data);
 
       // Clear the form fields
       setUsername("");
@@ -63,9 +61,9 @@ function Signup() {
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Password"
       />
-      <button type="submit" >Signup</button>
+      <button type="submit">Signup</button>
     </form>
   );
-}
+};
 
 export default Signup;

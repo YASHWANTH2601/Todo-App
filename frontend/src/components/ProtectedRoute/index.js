@@ -1,18 +1,16 @@
-import {useEffect}from "react";
-import { useNavigate  } from "react-router-dom";
-
+import React from "react";
+import { Navigate, useLocation } from "react-router-dom";
 
 const ProtectedRoute = ({ element: Component }) => {
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
+  const location = useLocation();
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/login" , { replace: true });
-    }
-  }, [token, navigate]);
+  // Redirect to login if no token
+  if (!token) {
+    return <Navigate to="/login" state={{ from: location }} replace />;
+  }
 
-  return token ? Component : null;
+  return Component;
 };
 
 export default ProtectedRoute;

@@ -16,7 +16,7 @@ router.post("/", authMiddleware, async (req, res) => {
 // Get Todos
 router.get("/", authMiddleware, async (req, res) => {
   const todos = await Todo.find({ userId: req.user.id });
-  res.json(todos);
+  res.json({ todos });
 });
 
 // Update Todo

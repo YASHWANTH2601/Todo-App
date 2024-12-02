@@ -1,35 +1,24 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import TodoList from "./components/TodoList";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import TodoList from "./pages/TodoList";
 import ProtectedRoute from "./components/ProtectedRoute";
-import TodoForm from "./components/TodoForm";
-import RedirectRoute from "./components/RedirectRoute";
+import TodoForm from "./pages/TodoForm";
 function App() {
   return (
     <Router>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <RedirectRoute element={<Login />} />
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <RedirectRoute element={<Login />} />
-          }
-        />
-        <Route path="/signup" element={<RedirectRoute element={<Signup />} />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
         <Route
           path="/todos"
-          element={<ProtectedRoute elements={<TodoList />} />}
+          element={<ProtectedRoute element={<TodoList />} />}
         />
         <Route
           path="/todos/add"
-          element={<ProtectedRoute elements={<TodoForm />} />}
+          element={<ProtectedRoute element={<TodoForm />} />}
         />
       </Routes>
     </Router>

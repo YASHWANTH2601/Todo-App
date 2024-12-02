@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 
-function TodoForm() {
+const TodoForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("pending");
 
-  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -16,7 +15,6 @@ function TodoForm() {
       return;
     }
 
-   
     const newTodo = {
       title,
       description,
@@ -24,12 +22,12 @@ function TodoForm() {
     };
 
     try {
-    
-      const response = await fetch("http://localhost:5000/api/todos/", {
+      const url = `${process.env.REACT_APP_API_URL}/todos/`;
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization":`Bearer ${token}`, 
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(newTodo),
       });
@@ -46,6 +44,7 @@ function TodoForm() {
         console.error("Error:", error.message);
       }
     } catch (error) {
+      // console.log(error);
       console.error("Error creating todo:", error);
     }
   };
@@ -76,10 +75,7 @@ function TodoForm() {
         </div>
         <div>
           <label>Status</label>
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          >
+          <select value={status} onChange={(e) => setStatus(e.target.value)}>
             <option value="pending">Pending</option>
             <option value="in-progress">In Progress</option>
             <option value="completed">Completed</option>
@@ -89,9 +85,8 @@ function TodoForm() {
           <button type="submit">Create Todo</button>
         </div>
       </form>
-      sds
     </div>
   );
-}
+};
 
 export default TodoForm;
